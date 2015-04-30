@@ -1,25 +1,30 @@
 var gala = (function() {
-  var displayFirstSlide = function($list, $imgs) {
-    $imgs.first().show();
-    $imgs.first().parent().show();
-    $list.css("display", "inline-block");
+
+  var addButtons = function($gala) {
+    $gala.prev().click(function() {
+      $images = $gala.find("img");
+      $images.show("slide", { direction: "left", distance: "150px" });
+      //$images.css("left", -150);
+    })
+
+    $gala.next().click(function() {
+      alert("clicked right");
+    });
   };
 
-  var makeGala = function(element) {
-    var $list = $(element);
-    var $imgs = $list.find("img");
-    if ($imgs.length > 0) {
-      displayFirstSlide($list, $imgs);
-    }
+  var create = function(gala) {
+    var $gala = $(gala);
+    var $images = $gala.find("img");
+    addButtons($gala);
   };
 
   return {
     initialize: function() {
-      $("ol.gala, ul.gala").each(function(index, element) {
-        makeGala(element);
+      $(".gala").each(function(index, gala) {
+        create(gala);
       });
     }
   }
 })();
 
-//$(document).ready(gala.initialize);
+$(document).ready(gala.initialize);

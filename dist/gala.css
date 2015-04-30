@@ -1,17 +1,19 @@
 .gala {
-  display: none;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.gala li {
   display: inline-block;
+  list-style-type: none;
   box-shadow: inset 0 0 8px rgba(0,0,0,0.9);
   line-height: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .gala img {
+  display: inline;
   position: relative;
   z-index: -1;
+  padding: 0;
+  margin: 0;
 }

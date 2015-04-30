@@ -1,20 +1,15 @@
 var gala = (function() {
-  var displayFirstSlide = function($list, $items) {
-    $items.each(function(index, element) {
-      if (index === 0) {
-        $(element).show();
-      } else {
-        $(element).hide();
-      }
-    });
-    $list.show();
+  var displayFirstSlide = function($list, $imgs) {
+    $imgs.first().show();
+    $imgs.first().parent().show();
+    $list.css("display", "inline-block");
   };
 
   var makeGala = function(element) {
     var $list = $(element);
-    var $items = $list.children("li");
-    if ($items.length > 0) {
-      displayFirstSlide($list, $items);
+    var $imgs = $list.find("img");
+    if ($imgs.length > 0) {
+      displayFirstSlide($list, $imgs);
     }
   };
 
@@ -27,4 +22,4 @@ var gala = (function() {
   }
 })();
 
-$(document).ready(gala.initialize);
+//$(document).ready(gala.initialize);

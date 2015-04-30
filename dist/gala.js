@@ -1,14 +1,17 @@
 var gala = (function() {
 
   var addButtons = function($gala) {
+    var width = $gala.width();
+
+    var $images = $gala.children("img");
+    $images.css("left", 0);
+
     $gala.prev().click(function() {
-      $images = $gala.find("img");
-      $images.show("slide", { direction: "left", distance: "150px" });
-      //$images.css("left", -150);
+      $images.css("left", "+=-"+width+"px");
     })
 
     $gala.next().click(function() {
-      alert("clicked right");
+      $images.css("left", "+="+width+"px");
     });
   };
 

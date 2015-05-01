@@ -24,3 +24,8 @@
   vertical-align: top;
   cursor: pointer;
 }
+
+.gala-disabled {
+  color: lightgray;
+  cursor: default;
+}

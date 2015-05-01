@@ -19,3 +19,9 @@
   -webkit-transition: left 0.4s ease-out;
   transition: left 0.4s ease-out;
 }
+
+.gala-nav {
+  line-height: 108px;
+  vertical-align: top;
+  cursor: pointer;
+}

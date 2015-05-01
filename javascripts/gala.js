@@ -12,11 +12,11 @@ var gala = (function() {
     $gala.after(RIGHT_BTN).next().css('line-height', height).click(getOnClickRight($gala, $images));
 
     updateButtonState($gala, 0, $images.length);
-    updateCaptionText($gala, $images, 0);
   };
 
   var addCaption = function($gala, $images) {
     $gala.wrap(FIGURE).after(CAPTION);
+    updateCaptionText($gala, $images, 0);
   };
 
   var create = function(gala) {

@@ -1,7 +1,7 @@
 var gala = (function() {
   var LEFT_BTN = '<span class="fa fa-fw fa-backward gala-nav"></span>';
   var RIGHT_BTN = '<span class="fa fa-fw fa-forward gala-nav"></span>';
-  var FIGURE = '<figure></figure>';
+  var FIGURE = '<figure class="gala-figure"></figure>';
   var CAPTION = '<figcaption></figcaption>';
 
   var addButtons = function($gala, $images) {

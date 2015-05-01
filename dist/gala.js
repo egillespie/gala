@@ -2,7 +2,7 @@ var gala = (function() {
   var LEFT_BTN = '<span class="fa fa-fw fa-backward gala-nav"></span>';
   var RIGHT_BTN = '<span class="fa fa-fw fa-forward gala-nav"></span>';
   var FIGURE = '<figure></figure>';
-  var CAPTION = '<figcaption class="gala-caption"></figcaption>';
+  var CAPTION = '<figcaption></figcaption>';
 
   var addButtons = function($gala, $images) {
     var height = $gala.height() + 'px';
@@ -74,7 +74,10 @@ var gala = (function() {
   };
 
   var updateCaptionText = function($gala, $images, currentImage) {
-    $gala.siblings("figcaption").text($($images[currentImage]).attr("alt"));
+    var $caption = $gala.siblings('figcaption');
+    $caption.fadeOut(200, function() {
+      $caption.text($images[currentImage].getAttribute('alt')).fadeIn(200);
+    });
   };
 
   return {

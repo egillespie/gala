@@ -11,7 +11,7 @@ The `example` directory in this repository provides a working example of gala.js
 <html>
 <head>
   <link rel="stylesheet" href="gala.css"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="font-awesome-4.3.0.min.css">
 </head>
 <body>
 
@@ -23,7 +23,7 @@ The `example` directory in this repository provides a working example of gala.js
     <img src="img/rarity.png" alt="Rarity"/>
   </div>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
   <script type="text/javascript" src="gala.js"></script>
 </body>
 </html>

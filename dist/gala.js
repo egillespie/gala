@@ -8,8 +8,8 @@ var gala = (function() {
     var height = $gala.height() + 'px';
 
     moveImages($images, 0); // First transition is ignored w/o this
-    $gala.before(LEFT_BTN).prev().css('line-height', height).click(getOnClickLeft($gala, $images));
-    $gala.after(RIGHT_BTN).next().css('line-height', height).click(getOnClickRight($gala, $images));
+    $gala.before(LEFT_BTN).prev().css('line-height', height).click(getOnNavLeft($gala, $images));
+    $gala.after(RIGHT_BTN).next().css('line-height', height).click(getOnNavRight($gala, $images));
 
     updateButtonState($gala, 0, $images.length);
   };
@@ -33,7 +33,7 @@ var gala = (function() {
     return parseInt($images.first().css('left'), 10);
   };
 
-  var getOnClickLeft = function($gala, $images) {
+  var getOnNavLeft = function($gala, $images) {
     return function() {
       var width = $gala.width();
       var offset = getImageOffset($images);
@@ -48,7 +48,7 @@ var gala = (function() {
     };
   };
 
-  var getOnClickRight = function($gala, $images) {
+  var getOnNavRight = function($gala, $images) {
     return function() {
       var width = $gala.width();
       var offset = getImageOffset($images);

@@ -19,6 +19,26 @@ var gala = (function() {
     updateCaptionText($gala, $images, 0);
   };
 
+  var addKeyboardNav = function($gala, $images) {
+    if ($gala.length != 1) {
+      return; // Keyboard navigation only works if there is only one gala
+    }
+
+    $(document).keydown(function(e) {
+      switch (e.which) {
+        case 37: // left
+          (getOnNavLeft($gala, $images))();
+          break;
+        case 39: // right
+          (getOnNavRight($gala, $images))();
+          break;
+        default:
+          return;
+      }
+      e.preventDefault();
+    });
+  };
+
   var create = function(gala) {
     var $gala = $(gala);
     var $images = $gala.children('img');
@@ -26,6 +46,7 @@ var gala = (function() {
     addCaption($gala, $images);
     if ($images.length > 1) {
       addButtons($gala, $images);
+      addKeyboardNav($gala, $images);
     }
   };
 

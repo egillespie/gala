@@ -5,7 +5,7 @@ var gala = (function() {
   var CAPTION = '<figcaption></figcaption>';
 
   var addButtons = function($gala, $images) {
-    var height = $gala.height() + 'px';
+    var height = getRenderHeight($images) + 'px';
 
     moveImages($images, 0); // First transition is ignored w/o this
     $gala.before(LEFT_BTN).prev().css('line-height', height).click(getOnNavLeft($gala, $images));
@@ -43,6 +43,8 @@ var gala = (function() {
     var $gala = $(gala);
     var $images = $gala.children('img');
 
+    $gala.height(getRenderHeight($images)).width(getRenderWidth($images));
+
     addCaption($gala, $images);
     if ($images.length > 1) {
       addButtons($gala, $images);
@@ -56,7 +58,7 @@ var gala = (function() {
 
   var getOnNavLeft = function($gala, $images) {
     return function() {
-      var width = $gala.width();
+      var width = getRenderWidth($images);
       var offset = getImageOffset($images);
       var totalImages = $images.length;
       if (offset % width != 0 || totalImages <= 1 || offset >= 0) {
@@ -71,7 +73,7 @@ var gala = (function() {
 
   var getOnNavRight = function($gala, $images) {
     return function() {
-      var width = $gala.width();
+      var width = getRenderWidth($images);
       var offset = getImageOffset($images);
       var totalImages = $images.length;
       if (offset % width != 0 || totalImages <= 1 || offset <= -(width * (totalImages-1))) {
@@ -83,6 +85,14 @@ var gala = (function() {
       updateCaptionText($gala, $images, currentImage);
     };
   };
+
+  var getRenderHeight = function($images) {
+    return $images.first().prop('naturalHeight');
+  }
+
+  var getRenderWidth = function($images) {
+    return $images.first().prop('naturalWidth');
+  }
 
   var moveImages = function($images, position) {
     $images.css('left', position+'px');

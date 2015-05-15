@@ -15,7 +15,7 @@ The `example` directory in this repository provides a working example of gala.js
 </head>
 <body>
 
-  <div class="gala" style="height:108px; width:150px;">
+  <div class="gala">
     <img src="img/applejack.png" alt="Applejack"/>
     <img src="img/fluttershy.png" alt="Fluttershy"/>
     <img src="img/pinkie-pie.png" alt="Pinkie Pie"/>

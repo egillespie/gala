@@ -51,6 +51,10 @@ var gala = (function() {
     resize($gala, $images);
   };
 
+  var getCurrentImage = function($gala) {
+    return $gala.attr('data-index') || 0;
+  };
+
   var getImageOffset = function($images) {
     return parseInt($images.first().css('left'), 10);
   };
@@ -63,10 +67,8 @@ var gala = (function() {
       if (offset % width != 0 || totalImages <= 1 || offset >= 0) {
         return;
       }
-      moveImages($images, offset+width);
       var currentImage = -offset/width-1;
-      updateButtonState($gala, currentImage, totalImages);
-      updateCaptionText($gala, $images, currentImage);
+      navigate($gala, $images, currentImage);
     };
   };
 
@@ -78,31 +80,44 @@ var gala = (function() {
       if (offset % width != 0 || totalImages <= 1 || offset <= -(width * (totalImages-1))) {
         return;
       }
-      moveImages($images, offset-width);
       var currentImage = 1-offset/width;
-      updateButtonState($gala, currentImage, totalImages);
-      updateCaptionText($gala, $images, currentImage);
+      navigate($gala, $images, currentImage);
     };
   };
 
   var getRenderHeight = function($images) {
-    return $images.first().prop('naturalHeight');
+    return $images.first().height();
   };
 
   var getRenderWidth = function($images) {
-    return $images.first().prop('naturalWidth');
+    return $images.first().width();
   };
 
-  var moveImages = function($images, position) {
+  var moveImages = function($images, currentImage) {
+    var position = -(currentImage * getRenderWidth($images));
     $images.css('left', position+'px');
   };
 
-  var resize = function($gala, $images) {
-    var height = getRenderHeight($images);
-    $gala.height(height).width(getRenderWidth($images));
+  var navigate = function($gala, $images, currentImage) {
+    var totalImages = $images.length;
+    moveImages($images, currentImage);
+    saveCurrentImage($gala, currentImage);
+    updateButtonState($gala, currentImage, totalImages);
+    updateCaptionText($gala, $images, currentImage);
+  };
 
-    $gala.prev().css('line-height', height+'px');
-    $gala.next().css('line-height', height+'px');
+  var resize = function($gala, $images) {
+    $gala.css('max-width', getRenderWidth($images)+'px');
+
+    moveImages($images, getCurrentImage($gala));
+
+    var height = getRenderHeight($images) + 'px';
+    $gala.prev().css('line-height', height);
+    $gala.next().css('line-height', height);
+  };
+
+  var saveCurrentImage = function($gala, currentImage) {
+    $gala.attr('data-index', currentImage);
   };
 
   var updateButtonState = function($gala, currentImage, totalImages) {
@@ -131,8 +146,16 @@ var gala = (function() {
       $('.gala').each(function(index, gala) {
         create(gala);
       });
+    },
+    resize: function() {
+      $('.gala').each(function(index, gala) {
+        var $gala = $(gala);
+        var $images = $gala.children('img');
+        resize($gala, $images);
+      });
     }
   }
 })();
 
 $(document).ready(gala.initialize);
+$(window).resize(gala.resize);

@@ -5,11 +5,10 @@ var gala = (function() {
   var CAPTION = '<figcaption></figcaption>';
 
   var addButtons = function($gala, $images) {
-    var height = getRenderHeight($images) + 'px';
-
     moveImages($images, 0); // First transition is ignored w/o this
-    $gala.before(LEFT_BTN).prev().css('line-height', height).click(getOnNavLeft($gala, $images));
-    $gala.after(RIGHT_BTN).next().css('line-height', height).click(getOnNavRight($gala, $images));
+
+    $gala.before(LEFT_BTN).prev().click(getOnNavLeft($gala, $images));
+    $gala.after(RIGHT_BTN).next().click(getOnNavRight($gala, $images));
 
     updateButtonState($gala, 0, $images.length);
   };
@@ -21,7 +20,7 @@ var gala = (function() {
 
   var addKeyboardNav = function($gala, $images) {
     if ($('.gala').length != 1) {
-      return; // Keyboard navigation only works if there is only one gala
+      return; // Keyboard navigation works if there is only one gala
     }
 
     $(document).keydown(function(e) {
@@ -43,13 +42,13 @@ var gala = (function() {
     var $gala = $(gala);
     var $images = $gala.children('img');
 
-    $gala.height(getRenderHeight($images)).width(getRenderWidth($images));
-
     addCaption($gala, $images);
     if ($images.length > 1) {
       addButtons($gala, $images);
       addKeyboardNav($gala, $images);
     }
+
+    resize($gala, $images);
   };
 
   var getImageOffset = function($images) {
@@ -88,14 +87,22 @@ var gala = (function() {
 
   var getRenderHeight = function($images) {
     return $images.first().prop('naturalHeight');
-  }
+  };
 
   var getRenderWidth = function($images) {
     return $images.first().prop('naturalWidth');
-  }
+  };
 
   var moveImages = function($images, position) {
     $images.css('left', position+'px');
+  };
+
+  var resize = function($gala, $images) {
+    var height = getRenderHeight($images);
+    $gala.height(height).width(getRenderWidth($images));
+
+    $gala.prev().css('line-height', height+'px');
+    $gala.next().css('line-height', height+'px');
   };
 
   var updateButtonState = function($gala, currentImage, totalImages) {
